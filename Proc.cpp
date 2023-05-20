@@ -2,16 +2,16 @@
 
 bool Memory::compareWords(vector<int> word1, vector<int> word2)
 {
+    bool g = false;
+    bool l = false;
     for (int i = 0; i < word1.size(); i++)
     {
-        if (word1[i] == 1 && word2[i] == 0)
-        {
-            return true;
-        }
-        else if (word2[i] == 1 && word1[i] == 0)
-        {
-            return false;
-        }
+        g = g | (!word2[i] & word1[i] & !l);
+        l = l | (word2[i] & !word1[i] & !g);
+    }
+    if (g == 1 && l == 0)
+    {
+        return true;
     }
     return false;
 }
