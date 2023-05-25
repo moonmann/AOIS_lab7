@@ -9,7 +9,7 @@ class Memory
 {
 private:
     vector<vector<int>> massive;
-    bool compareWords(vector<int> word1, vector<int> word2);
+    int compareWords(vector<int> word1, vector<int> word2);
 public:
     vector<vector<int>> getMassive();
     void getRandomMass();

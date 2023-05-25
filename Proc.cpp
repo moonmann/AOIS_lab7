@@ -1,6 +1,6 @@
 #include "Proc.h"
 
-bool Memory::compareWords(vector<int> word1, vector<int> word2)
+int Memory::compareWords(vector<int> word1, vector<int> word2)
 {
     bool g = false;
     bool l = false;
@@ -9,11 +9,9 @@ bool Memory::compareWords(vector<int> word1, vector<int> word2)
         g = g | (!word2[i] & word1[i] & !l);
         l = l | (word2[i] & !word1[i] & !g);
     }
-    if (g == 1 && l == 0)
-    {
-        return true;
-    }
-    return false;
+    if (g == 0 && l == 0)   return 0;
+    else if (g == 1 && l == 0)  return 1;
+    else if (g == 0 && l == 1)  return 2;
 }
 
 vector<vector<int>> Memory::getMassive()
@@ -37,7 +35,7 @@ void Memory::sortAscending()
 {
     for (int i = 0; i < massive.size(); i++) {
         for (int j = 0; j < massive.size() - i -1 ; j++) {
-            if (compareWords(massive[j], massive[j + 1])) {
+            if (compareWords(massive[j], massive[j + 1]) == 1) {
                 vector<int> temp_word = massive[j];
                 massive[j] = massive[j + 1];
                 massive[j + 1] = temp_word;
@@ -50,7 +48,7 @@ void Memory::sortDescending()
 {
     for (int i = 0; i < massive.size(); i++) {
         for (int j = 0; j < massive.size() - i - 1; j++) {
-            if (!compareWords(massive[j], massive[j + 1])) {
+            if (compareWords(massive[j], massive[j + 1]) == 2) {
                 vector<int> temp_word = massive[j];
                 massive[j] = massive[j + 1];
                 massive[j + 1] = temp_word;
