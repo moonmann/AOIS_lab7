@@ -6,8 +6,8 @@ int Memory::compareWords(vector<int> word1, vector<int> word2)
     bool l = false;
     for (int i = 0; i < word1.size(); i++)
     {
-        g = g | (!word2[i] & word1[i] & !l);
-        l = l | (word2[i] & !word1[i] & !g);
+        g = g || (!word2[i] && word1[i] && !l);
+        l = l || (word2[i] && !word1[i] && !g);
     }
     if (g == 0 && l == 0)   return 0;
     else if (g == 1 && l == 0)  return 1;
